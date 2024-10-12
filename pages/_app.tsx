@@ -12,14 +12,8 @@ import '@/styles/globals.css'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ClerkProvider>
-      <SignedOut>
-        <SignInButton />
-      </SignedOut>
-      <SignedIn>
-        <UserButton />
-      </SignedIn>
+    <ClerkProvider {...pageProps}>
       <Component {...pageProps} />
     </ClerkProvider>
-  )
+  );
 }

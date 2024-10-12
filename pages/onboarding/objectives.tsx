@@ -29,8 +29,8 @@ export default function Page() {
             <NavOnboarding></NavOnboarding>
             <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 pt-24 mx-auto px-4 py-0 flex flex-col justify-between items-center">
                 <div className="flex flex-col items-center">
-                    <h2 className={`text-sm font-normal text-center mx-16 mb-4 ${inter.className}`}>Let&apos;s quickly personnalized your learning journey?</h2>
-                    <h2 className={`text-4xl font-semibold text-blue-700 text-center mx-16 mb-8  ${source_serif.className}`}>Why are you learning english ?</h2>
+                    <h2 className={`text-sm font-normal text-center mx-16 mb-4 ${inter.className}`}>Let&apos;s quickly personalise your learning journey</h2>
+                    <h2 className={`text-4xl font-semibold text-blue-700 text-center mx-16 mb-8  ${source_serif.className}`}>Why are you learning Korean?</h2>
                     
                 </div>
 
