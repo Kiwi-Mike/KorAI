@@ -1,14 +1,4 @@
-
-This is the starter project for this video : https://youtu.be/eBzJwlnrqIQ?si=FgxpM6-VHNzhgDvz
-
-
-
-Feels free to contribute
-
-
-
-
-
+Base project imported from starter code
 
 ## Getting Started
 
