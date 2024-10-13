@@ -1,7 +1,4 @@
-import Image from "next/image";
 import { Inter, Source_Serif_4 } from "next/font/google";
-import Link from "next/link";
-import { UserButton } from "@clerk/nextjs";
 import { NavOnboarding } from "@/components/NavOnboarding";
 import { useRouter } from "next/router";
 import { OnboardingSelectBox } from "@/components/OnboardingSelectBox";
@@ -20,8 +17,20 @@ const items = [
 export default function Page() {
     let router = useRouter()
 
-    const action = (value: string)=>{
+    const action = async (value: string)=>{
+        const userPreferences ={
+            languageLevel: localStorage.getItem("language-level"),
+            objectives: localStorage.getItem("objectives"),
+            commitment: value,
+        }
         
+        try {
+            const response = await axios.post("/api/user/save_preferences", {...userPreferences});
+        } catch (error) {
+            console.error(error)
+        }
+
+        // router.push("/assistant/chat")
     }
   return (
         <main className={`flex w-full min-h-screen bg-[#f7f5ff] flex-col p-0  ${inter.className}`}>  

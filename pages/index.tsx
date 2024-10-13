@@ -28,14 +28,14 @@ export default function Home() {
                 <Nav></Nav>
               <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 pt-24 mx-auto px-4 py-0 flex flex-col justify-between items-center">
           <div className="flex flex-col items-center">
-              <h2 className={`text-5xl font-normal text-center mx-16 w-1/2 mb-8  ${source_serif.className}`}>Learn <b className={` ${inter.className} text-blue-700`}>english</b> the easiest way with our AI tutor?</h2>
+              <h2 className={`text-5xl font-normal text-center mx-16 w-1/2 mb-8  ${source_serif.className}`}>Learn <b className={` ${inter.className} text-blue-700`}>Korean</b> the easiest way with our AI tutor?</h2>
               <div className="text-center mt-8">
                 <a href="#" className="px-6 py-2 rounded-full text-md font-medium text-white  bg-blue-500 hover:bg-blue-700">Start learning with our AI tutor</a>
               </div>
           </div>
 
           <div className="flex justify-between items-center w-3/5 mt-16">
-            <img className="w-full" src="https://images.ctfassets.net/zuzqvf4m2o58/3DWc31d5tAEfqbUYYLoxW5/d2ec91a7375c1b2bdd55df74baca9ac6/Hero_image_ENG_Desktop__2_.png?w=900&h=661&q=50&fm=avif"/>
+            <img className="w-full" src="https://cdn.britannica.com/49/1949-050-39ED83BA/Flag-South-Korea.jpg"/>
           </div>
         </div>
         </div>
