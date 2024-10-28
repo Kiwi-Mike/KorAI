@@ -31,3 +31,22 @@ export const save_preferences = async (preferencesData: {userId: string, languag
       await db.close()
     }
 }
+
+export const get_preferences = async (userId: string) => {
+  try {
+    db = await openDB()
+    const stmt = await db.prepare("SELECT * FROM userPreferences WHERE userID=?")
+    const result = await stmt.get(
+      userId
+    )
+    await stmt.finalize()
+    console.log(result)
+    return result
+  } catch (error) {
+    console.error(error)
+  }
+
+  finally{
+    await db.close()
+  }
+}
