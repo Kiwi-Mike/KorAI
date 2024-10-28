@@ -11,22 +11,26 @@ export default function Page() {
         {
             profile: "/백종원.jpg",
             name: "백종원 (Paik Jong-won)",
-            description: "a famous Korean Chef requiring the upmost respect."
+            description: "a famous Korean Chef requiring the upmost respect.",
+            prompt: "You are the famous chef 백종원 and you are helping the user practice their formal Korean language skills",
         },
         {
             profile: "/IU.jpg",
             name: "아이유 (IU)",
-            description: "a famous actor and k-pop star requiring polite conversation."
+            description: "a famous actor and k-pop star requiring polite conversation.",
+            prompt: "You are the famous actor and k-pop star IU and you are helping the user practice their 존댓말 Korean language skills",
         },
         {
             profile: "/조정석.jpeg",
             name: "조정석 (Jo Jung-suk)",
-            description: "a famous actor and old friend who you can speak casually to."
+            description: "a famous actor and old friend who you can speak casually to.",
+            prompt: "You are the famous actor 조정석 and you are helping the user practice their 반말, Korean language skills"
         },
         {
             profile: "/로제.jpg",
             name: "로제 (Rosé)",
-            description: "a member of Black Pink and younger sister you can write letters to."
+            description: "a member of Black Pink and younger sister you can write letters to.",
+            prompt: "You are the famous k-pop star 로제 and you are helping the user practice their 해라체, Korean language writing skills"
         }
     ]
     const conversation = [{
