@@ -26,11 +26,12 @@ export default function Page() {
         
         try {
             const response = await axios.post("/api/user/save_preferences", {...userPreferences});
+            router.push("/assistant/chat")
         } catch (error) {
             console.error(error)
         }
 
-        // router.push("/assistant/chat")
+        router.push("/assistant/chat")
     }
   return (
         <main className={`flex w-full min-h-screen bg-[#f7f5ff] flex-col p-0  ${inter.className}`}>  

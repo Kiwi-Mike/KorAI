@@ -9,24 +9,24 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Page() {
     const characters = [
         {
-            profile: "/profile1.jpg",
-            name: "Henry Boyd",
-            description: "a resilient nomad, seeks vengeance after her tribes destruction but questions the morality of her quest."
+            profile: "/백종원.jpg",
+            name: "백종원 (Paik Jong-won)",
+            description: "a famous Korean Chef requiring the upmost respect."
         },
         {
-            profile: "/profile2.jpg",
-            name: "Henry Ford",
-            description: "a resilient nomad, seeks vengeance after her tribes destruction but questions the morality of her quest."
+            profile: "/IU.jpg",
+            name: "아이유 (IU)",
+            description: "a famous actor and k-pop star requiring polite conversation."
         },
         {
-            profile: "/profile3.jpg",
-            name: "Cool Brigde",
-            description: "a resilient nomad, seeks vengeance after her tribes destruction but questions the morality of her quest."
+            profile: "/조정석.jpeg",
+            name: "조정석 (Jo Jung-suk)",
+            description: "a famous actor and old friend who you can speak casually to."
         },
         {
-            profile: "/profile4.jpg",
-            name: "Baby boss",
-            description: "a resilient nomad, seeks vengeance after her tribes destruction but questions the morality of her quest."
+            profile: "/로제.jpg",
+            name: "로제 (Rosé)",
+            description: "a member of Black Pink and younger sister you can write letters to."
         }
     ]
     const conversation = [{
