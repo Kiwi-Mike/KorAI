@@ -1,12 +1,26 @@
 import { Inter, Source_Serif_4 } from "next/font/google";
 import { ChatSideNavProfile } from "@/components/ChatSideNavProfile";
 import { ChatBubble } from "@/components/ChatBubble";
+import { useState } from "react";
 
 
 const source_serif = Source_Serif_4({ subsets: ["latin"] });
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Page() {
+    const [message, setMessage] = useState("")
+
+    const handleFormSubmission = (e: any)=>
+        {
+            e.preventDefault();
+
+            //message temp test
+            alert(message)
+
+        
+            setMessage("");
+        }
+
     const characters = [
         {
             profile: "/백종원.jpg",
@@ -149,13 +163,14 @@ export default function Page() {
                                     </div>
                                 </div>
                                 <div className="flex items-center p-6 pt-0 ">
-                                    <form className="flex w-full items-center space-x-2">
+                                    <form className="flex w-full items-center space-x-2" onSubmit={handleFormSubmission}>
                                     <input
                                         className="flex h-12 w-full rounded-md border border-gray-300 border-input bg-background px-3 py-4 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 flex-1"
                                         id="message"
                                         placeholder="Type your message..."
                                         autoComplete="off"
-                                        value={""}
+                                        value={message}
+                                        onChange={(e)=>setMessage(e.target.value)}
                                     />
                                     <button
                                         className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-blue-500 text-blue-500-foreground hover:bg-blue-500/90 h-12 w-12"
