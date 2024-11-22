@@ -2,6 +2,7 @@ import { Inter, Source_Serif_4 } from "next/font/google";
 import { ChatSideNavProfile } from "@/components/ChatSideNavProfile";
 import { ChatBubble } from "@/components/ChatBubble";
 import { useState } from "react";
+import axios from "axios";
 
 
 const source_serif = Source_Serif_4({ subsets: ["latin"] });
@@ -9,17 +10,6 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Page() {
     const [message, setMessage] = useState("")
-
-    const handleFormSubmission = (e: any)=>
-        {
-            e.preventDefault();
-
-            //message temp test
-            alert(message)
-
-        
-            setMessage("");
-        }
 
     const characters = [
         {
@@ -47,10 +37,33 @@ export default function Page() {
             prompt: "You are Rosé, a Black Pink member, and the user’s younger sister, assisting them in practicing written Korean (해라체) for letter writing and correspondence"
         }
     ]
-    const conversation = [{
+    const [conversation, setConversation] = useState ([{
         role: "assistant",
         content: "Hi, how can I help you today?"
-    }]
+    }])
+
+    const handleFormSubmission = async (e: any)=>
+        {
+            e.preventDefault();
+            const actualConversation = [...conversation, {role: "user,", content: message}]
+
+            setConversation(actualConversation)
+
+            try{
+                const prompt = characters[0].prompt;
+                const response = await axios.post("/api/chat", {message, prompt, conversation})
+                console.log(response.data)
+                setConversation([...actualConversation, response.data.response.message])
+
+            }
+            catch (error) {
+                console.log(error)
+            }
+
+        
+            setMessage("");
+        }
+
   return (
         <main className={`flex w-full h-screen bg-[#f7f5ff] flex-col p-0  ${inter.className}`}>  
            <div className="shadow flex items-center py-4 justify-center bg-[#f7f5ff]">
