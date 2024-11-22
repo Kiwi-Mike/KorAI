@@ -1,9 +1,14 @@
 services:
   ollama:
-    image: ollama/ollama  # Replace with the actual image name
-    container_name: OllamaKorAI
-    ports:
-      - "40004:40004"
     volumes:
-      - ./data:/data  # Optional: persist models or data
-    command: ["ollama", "pull", "gemma:2b"]  # Pull the required model on startup
+      - ollama:/root/.ollama
+    container_name: ollama
+    pull_policy: always
+    tty: true
+    restart: unless-stopped
+    image: ollama/ollama:latest
+    ports:
+      - ${OLLAMA_WEBAPI_PORT-40004}:40004
+
+volumes:
+  ollama: {}
