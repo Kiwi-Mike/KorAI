@@ -23,7 +23,7 @@ export default async function handler(
         }
     ]
 
-    const ollama = new Ollama({host: "http://localhost:40004"})
+    const ollama = new Ollama({host: "http://localhost:11434"})
     const message = await ollama.chat({
         model: "gemma:2b",
         messages: [...conversation, ...req.body.conversation]
