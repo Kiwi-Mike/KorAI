@@ -8,10 +8,10 @@ After cloning the repository, run the following commands to run the Ollama docke
   2. docker-compose build
   3. docker-compose up -d
 
-     Pull the gemma:2b model
+Pull the gemma:2b model
   4. docker exec -it ollama ollama pull gemma:2b
      
-      Check container is running
+Check container is running
   5. docker ps
 
 Then, run the development server:
