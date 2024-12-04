@@ -10,6 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Page() {
     const [message, setMessage] = useState("")
+    const [characterIndex, setCharacterIndex] = useState(0)
 
     const characters = [
         {
@@ -48,10 +49,10 @@ export default function Page() {
             const actualConversation = [...conversation, {role: "user,", content: message}]
 
             setConversation(actualConversation)
+            setMessage("");
 
             try{
-                const prompt = characters[0].prompt;
-                const response = await axios.post("/api/chat", {message, prompt, conversation})
+                const response = await axios.post("/api/chat", {prompt: characters[characterIndex].prompt, conversation: actualConversation})
                 console.log(response.data)
                 setConversation([...actualConversation, response.data.response.message])
 
@@ -60,8 +61,14 @@ export default function Page() {
                 console.log(error)
             }
 
-        
-            setMessage("");
+        }
+
+        const selectProfile = (index: number)=>{
+            setCharacterIndex(index)
+            setConversation([{
+                role: "assistant",
+                content: "Hi, how can I help you today?"
+            }])
         }
 
   return (
@@ -117,7 +124,7 @@ export default function Page() {
                             </div>
                             <div className="flex flex-col space-y-1 mt-4 -mx-2 overflow-y-auto">
                                 {characters.map((item, index)=>(
-                                    <ChatSideNavProfile onClick={()=>{}} key={index} active={1 == index} character={item}></ChatSideNavProfile>
+                                    <ChatSideNavProfile onClick={()=>selectProfile(index)} key={index} active={characterIndex == index} character={item}></ChatSideNavProfile>
                                 ))}
                                 {/* <ChatSideNavProfile profile="/profile2.jpg" active={true}></ChatSideNavProfile>
                                 <ChatSideNavProfile profile="/profile3.jpg"></ChatSideNavProfile>
@@ -136,12 +143,12 @@ export default function Page() {
                                         <img
                                         className="aspect-square h-full w-full"
                                         alt="Image"
-                                        src={characters[0].profile}
+                                        src={characters[characterIndex].profile}
                                         />
                                     </span>
                                     <div>
-                                        <p className="text-md font-medium leading-none">{characters[0].name}</p>
-                                        <p className="text-[.8rem] text-gray-500 mt-2">{characters[0].description}</p>
+                                        <p className="text-md font-medium leading-none">{characters[characterIndex].name}</p>
+                                        <p className="text-[.8rem] text-gray-500 mt-2">{characters[characterIndex].description}</p>
                                     </div>
                                 </div>
                                 
@@ -156,12 +163,12 @@ export default function Page() {
                                                 <img
                                                 className="aspect-square h-full w-full"
                                                 alt="Image"
-                                                src={characters[0].profile}
+                                                src={characters[characterIndex].profile}
                                                 />
                                             </span>
                                             <div className="flex items-center flex-col mt-6">
-                                                <p className="text-md font-medium leading-none">{characters[0].name}</p>
-                                                <p className="text-[.8rem] text-gray-500 mt-2">{characters[0].description}</p>
+                                                <p className="text-md font-medium leading-none">{characters[characterIndex].name}</p>
+                                                <p className="text-[.8rem] text-gray-500 mt-2">{characters[characterIndex].description}</p>
                                             </div>
                                         </div>
                                     </div>
