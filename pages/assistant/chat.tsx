@@ -38,37 +38,52 @@ export default function Page() {
             prompt: "You are Rosé, a Black Pink member, and the user’s younger sister, assisting them in practicing written Korean (해라체) for letter writing and correspondence"
         }
     ]
-    const [conversation, setConversation] = useState ([{
-        role: "assistant",
-        content: "Hi, how can I help you today?"
-    }])
+    const [CharacterConversations, setCharacterConversations] = useState(
+        characters.map(() => [{
+            role: "assistant",
+            content: "Hi, how can I help you today?"
+        }])
+    );
+
+    const [currentConversation, setCurrentConversation] = useState(CharacterConversations[0]);
+
+    const selectProfile = (index: number)=>{
+        setCharacterIndex(index)
+        setCurrentConversation(CharacterConversations[index])
+    }
 
     const handleFormSubmission = async (e: any)=>
         {
             e.preventDefault();
-            const actualConversation = [...conversation, {role: "user,", content: message}]
+            const updatedConversation = [...currentConversation, {role: "user,", content: message}]
 
-            setConversation(actualConversation)
+            setCurrentConversation(updatedConversation)
             setMessage("");
 
             try{
-                const response = await axios.post("/api/chat", {prompt: characters[characterIndex].prompt, conversation: actualConversation})
+                const response = await axios.post("/api/chat", {prompt: characters[characterIndex].prompt, conversation: updatedConversation})
                 console.log(response.data)
-                setConversation([...actualConversation, response.data.response.message])
+
+                const newMessage = response.data.response.message;
+                const updatedConversationWithResponse = [
+                    ...updatedConversation,
+                    newMessage
+                ];
+
+                setCurrentConversation([...updatedConversationWithResponse])
+
+                //Updating the characters conversation record using the previous state
+                setCharacterConversations(prev => {
+                    const newConversations = [...prev];
+                    newConversations[characterIndex] = updatedConversationWithResponse;
+                    return newConversations;
+                });
 
             }
             catch (error) {
                 console.log(error)
             }
 
-        }
-
-        const selectProfile = (index: number)=>{
-            setCharacterIndex(index)
-            setConversation([{
-                role: "assistant",
-                content: "Hi, how can I help you today?"
-            }])
         }
 
   return (
@@ -173,7 +188,7 @@ export default function Page() {
                                         </div>
                                     </div>
                                     <div className="space-y-4">
-                                        {conversation.map((message, index)=>(
+                                        {currentConversation.map((message, index)=>(
                                             <ChatBubble voice={()=>{}} key={index} direction={message.role == "assistant" ? "left" : "right"}>
                                                 {message.content}
                                             </ChatBubble>
