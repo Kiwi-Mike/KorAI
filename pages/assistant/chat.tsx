@@ -62,7 +62,6 @@ export default function Page() {
 
             try{
                 const response = await axios.post("/api/chat", {prompt: characters[characterIndex].prompt, conversation: updatedConversation})
-                console.log(response.data)
 
                 const newMessage = response.data.response.message;
                 const updatedConversationWithResponse = [
@@ -84,6 +83,17 @@ export default function Page() {
                 console.log(error)
             }
 
+        }
+
+        const feedbackHandler = async (content: string) => {
+
+            try {
+                const response = await axios.post("/api/feedback", {message: content});
+                alert(response.data.response.message.content)
+            } catch (error) {
+                console.log(error)
+            }
+            
         }
 
   return (
@@ -189,7 +199,7 @@ export default function Page() {
                                     </div>
                                     <div className="space-y-4">
                                         {currentConversation.map((message, index)=>(
-                                            <ChatBubble voice={()=>{}} key={index} direction={message.role == "assistant" ? "left" : "right"}>
+                                            <ChatBubble voice={()=>{}} feedbackHandler={()=>{feedbackHandler(message.content)}} key={index} direction={message.role == "assistant" ? "left" : "right"}>
                                                 {message.content}
                                             </ChatBubble>
                                         ))}

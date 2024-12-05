@@ -1,7 +1,7 @@
 import { MouseEventHandler, useRef } from 'react';
 import Markdown from 'react-markdown'
 
-export const ChatBubble = ({direction, voice, children}: {direction: "left" | "right", voice?: MouseEventHandler<HTMLSpanElement>, children: any}) =>{
+export const ChatBubble = ({direction, voice, feedbackHandler, children}: {direction: "left" | "right", voice?: MouseEventHandler<HTMLSpanElement>, feedbackHandler?:MouseEventHandler<HTMLSpanElement>, children: any}) =>{
     const audioRef:any = useRef();
     const readText = ()=>{
 
@@ -13,7 +13,7 @@ export const ChatBubble = ({direction, voice, children}: {direction: "left" | "r
                 <Markdown>{children}</Markdown>
             </div>
             {direction == "right"? (
-                <span className="flex w-max max-w-[75%] flex-col gap-2 rounded-lg px-3 py-0 text-cyan-800 text-[.75rem] ml-auto underline cursor-pointer">Feedback</span>
+                <span className="flex w-max max-w-[75%] flex-col gap-2 rounded-lg px-3 py-0 text-cyan-800 text-[.75rem] ml-auto underline cursor-pointer" onClick={feedbackHandler}>Feedback</span>
            ):(
             <span className="cursor-pointer flex w-max max-w-[75%] flex-col gap-2 rounded-lg px-3 py-0 text-blue-800 text-[.75rem] underline" onClick={voice}>
                 Read outloud
