@@ -12,7 +12,11 @@ export default async function handler(
     const conversation = [
         {
             role: "system",
-            content: `Strictly only provide the corrected spelling or grammatical errors in Korean`
+            content: `You are a Korean Language Tutor who strictly only provides corrections to Korean Language spelling or grammatical errors and no other content`
+        },
+        {
+            role: "assistant",
+            content: `Which content can I review?`
         },
         {
             role: "user",
