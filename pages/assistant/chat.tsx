@@ -11,6 +11,7 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Page() {
     const [message, setMessage] = useState("")
     const [characterIndex, setCharacterIndex] = useState(0)
+    const [loading, setLoading] = useState (false)
 
     const characters = [
         {
@@ -54,6 +55,7 @@ export default function Page() {
 
     const handleFormSubmission = async (e: any)=>
         {
+            setLoading(true)
             e.preventDefault();
             const updatedConversation = [...currentConversation, {role: "user,", content: message}]
 
@@ -82,6 +84,7 @@ export default function Page() {
             catch (error) {
                 console.log(error)
             }
+            setLoading(false)
 
         }
 
@@ -221,6 +224,8 @@ export default function Page() {
                                         className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-blue-500 text-blue-500-foreground hover:bg-blue-500/90 h-12 w-12"
                                         type="submit"
                                     >
+                                    {loading ? <span className = "loader"></span>: (
+                                        <>
                                         <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width={24}
@@ -237,6 +242,9 @@ export default function Page() {
                                         <path d="M22 2 11 13" />
                                         </svg>
                                         <span className="sr-only">Send</span>
+                                        </>
+                                    )}
+                                        
                                     </button>
                                     </form>
                                 </div>
