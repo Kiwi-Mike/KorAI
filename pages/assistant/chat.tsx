@@ -3,6 +3,8 @@ import { ChatSideNavProfile } from "@/components/ChatSideNavProfile";
 import { ChatBubble } from "@/components/ChatBubble";
 import { useState } from "react";
 import axios from "axios";
+import Modal from "@/components/Modal";
+import Markdown from "react-markdown";
 
 
 const source_serif = Source_Serif_4({ subsets: ["latin"] });
@@ -10,8 +12,10 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Page() {
     const [message, setMessage] = useState("")
+    const [feedback, setFeedback] = useState("")
     const [characterIndex, setCharacterIndex] = useState(0)
     const [loading, setLoading] = useState (false)
+    const [open, setOpen] = useState(false)
 
     const characters = [
         {
@@ -90,12 +94,16 @@ export default function Page() {
 
         const feedbackHandler = async (content: string) => {
 
+            setLoading(true)
             try {
+                
                 const response = await axios.post("/api/feedback", {message: content});
-                alert(response.data.response.message.content)
+                setFeedback(response.data.response.message.content)
+                setOpen(true)
             } catch (error) {
                 console.log(error)
             }
+            setLoading(false)
             
         }
 
@@ -254,7 +262,9 @@ export default function Page() {
                 </div>
                 </>
 
-
+                <Modal open={open} setOpen={setOpen} characterIndex={characterIndex} characters={characters}>
+                    <Markdown>{feedback}</Markdown>
+                </Modal>
 
         </main>
 
